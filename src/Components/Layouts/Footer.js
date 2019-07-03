@@ -21,7 +21,7 @@ export default ({ categories, category, onSelect }) => {
     >
     <Tab label="All"/>
       {categories.map(category => (
-        <Tab label={category} />
+        <Tab key={category} label={category} />
       ))}
     </Tabs>
   </Paper>
