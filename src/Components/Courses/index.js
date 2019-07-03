@@ -20,23 +20,26 @@ const styles = {
 };
 
 // export default a function that is going to recieve props
-export default ({ courses }) => (
+export default ({ courses, category }) => (
   <Grid container>
     <Grid item sm={3}>
       <Paper style={styles.Paper}>
-        {courses.map(([category, courses]) => (
-          <Fragment>
-            <Typography variant="h6" style={{ textTransform: "capitalize" }}>
-              {category}
-            </Typography>
-            <List component="ul">
-              {courses.map(({ title }) => (
-                <ListItem button>
-                  <ListItemText primary={title} />
-                </ListItem>
-              ))}
-            </List>
-          </Fragment>
+        {courses.map(([group, courses]) => (
+          !category || category === group
+          ? <Fragment>
+          <Typography variant="h6" style={{ textTransform: "capitalize" }}>
+            {group}
+          </Typography>
+          <List component="ul">
+            {courses.map(({ title }) => (
+              <ListItem button>
+                <ListItemText primary={title} />
+              </ListItem>
+            ))}
+          </List>
+        </Fragment>
+          : null
+          
         ))}
       </Paper>
     </Grid>

@@ -5,7 +5,8 @@ import { categories, courses } from "./store"
 
 class App extends Component {
   state = {
-    courses
+    courses,
+    category: 'engineering'
   };
 
   getCoursesByCategory = () => {
@@ -20,15 +21,23 @@ class App extends Component {
     }, {}));
   }
 
+  handleCategorySelected = (category) => {
+    this.setState({
+      category
+    })
+
+  }
+
   render() {
     console.log(this.getCoursesByCategory());
     const courses = this.getCoursesByCategory();
+    const { category } = this.state;
     return (
       <Fragment>
         <Header />
         <h4>Hi from React</h4>
-        <Courses courses={courses}/>
-        <Footer categories={categories}/>
+        <Courses courses={courses} category={category}/>
+        <Footer category={category} categories={categories} onSelect={this.handleCategorySelected}/>
       </Fragment>
     );
   }
