@@ -36,12 +36,26 @@ class App extends Component {
     }));
   };
 
+  handleCourseCreate = course => {
+    this.setState(({ courses }) => ({
+      courses: [
+        ...courses,
+        course
+      ]
+    }))
+
+  }
+
   render() {
     const courses = this.getCoursesByCategory();
     const { category, course } = this.state;
     return (
       <Fragment>
-        <Header />
+        <Header
+        categories={categories}
+        onCourseCreate={this.handleCourseCreate}
+        
+        />
         <h4>Hi from React</h4>
         <Courses
           courses={courses}
