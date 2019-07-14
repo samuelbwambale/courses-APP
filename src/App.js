@@ -11,26 +11,29 @@ class App extends Component {
   };
 
   getCoursesByCategory = () => {
+    const initialCourses = categories.reduce((courses, category) => ({
+      ...courses,
+      [category]: []
+    }), {})
+    console.log('>>>>>', courses, initialCourses)
     return Object.entries(
       this.state.courses.reduce((courses, course) => {
         const { categories } = course;
 
-        courses[categories] = courses[categories]
-          ? [...courses[categories], course]
-          : [course];
+        courses[categories] = [...courses[categories], course]
 
         return courses;
-      }, {})
+      }, initialCourses)
     );
   };
 
-  handleCategorySelected = category => {
+  handleCategorySelect = category => {
     this.setState({
       category
     });
   };
 
-  handleCourseCourseSelected = id => {
+  handleCourseSelect = id => {
     this.setState(({ courses }) => ({
       course: courses.find(ex => ex.id === id)
     }));
@@ -38,12 +41,14 @@ class App extends Component {
 
   handleCourseCreate = course => {
     this.setState(({ courses }) => ({
-      courses: [
-        ...courses,
-        course
-      ]
-    }))
+      courses: [...courses, course]
+    }));
+  };
 
+  handleCourseDelete = id => {
+    this.setState(({ courses }) => ({
+      courses: courses.filter(course => course.id !== id)
+    }))
   }
 
   render() {
@@ -52,21 +57,20 @@ class App extends Component {
     return (
       <Fragment>
         <Header
-        categories={categories}
-        onCourseCreate={this.handleCourseCreate}
-        
+          categories={categories}
+          onCourseCreate={this.handleCourseCreate}
         />
-        <h4>Hi from React</h4>
         <Courses
           courses={courses}
           category={category}
-          onSelect={this.handleCourseCourseSelected}
+          onSelect={this.handleCourseSelect}
           course={course}
+          onCourseDelete={this.handleCourseDelete}
         />
         <Footer
           category={category}
           categories={categories}
-          onSelect={this.handleCategorySelected}
+          onSelect={this.handleCategorySelect}
         />
       </Fragment>
     );
