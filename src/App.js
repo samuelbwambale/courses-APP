@@ -15,7 +15,7 @@ class App extends Component {
       ...courses,
       [category]: []
     }), {})
-    console.log('>>>>>', courses, initialCourses)
+
     return Object.entries(
       this.state.courses.reduce((courses, course) => {
         const { categories } = course;
@@ -35,7 +35,8 @@ class App extends Component {
 
   handleCourseSelect = id => {
     this.setState(({ courses }) => ({
-      course: courses.find(ex => ex.id === id)
+      course: courses.find(ex => ex.id === id),
+      editMode: false
     }));
   };
 
@@ -47,13 +48,32 @@ class App extends Component {
 
   handleCourseDelete = id => {
     this.setState(({ courses }) => ({
-      courses: courses.filter(course => course.id !== id)
+      courses: courses.filter(course => course.id !== id),
+      editMode: false,
+      course: {}
+    }))
+  }
+
+  handleSelectCourseEdit = id => {
+    this.setState(({ courses }) => ({
+      course: courses.find(ex => ex.id === id),
+      editMode: true
+    }));
+  }
+
+  handleCourseEdit = course => {
+    this.setState(({ courses }) => ({
+      courses: [
+        ...courses.filter(crs => crs.id !== course.id),
+        course
+      ],
+      course
     }))
   }
 
   render() {
     const courses = this.getCoursesByCategory();
-    const { category, course } = this.state;
+    const { category, course, editMode } = this.state;
     return (
       <Fragment>
         <Header
@@ -62,10 +82,15 @@ class App extends Component {
         />
         <Courses
           courses={courses}
+          editMode={editMode}
           category={category}
+          // categories from the store
+          categories={categories}
           onSelect={this.handleCourseSelect}
           course={course}
           onCourseDelete={this.handleCourseDelete}
+          onCourseEdit={this.handleSelectCourseEdit}
+          onEdit={this.handleCourseEdit}
         />
         <Footer
           category={category}

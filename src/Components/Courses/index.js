@@ -7,10 +7,11 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton
+  IconButton,
+  DialogContent
 } from "@material-ui/core";
-import Delete from "@material-ui/icons/Delete";
-
+import { Delete, Edit } from "@material-ui/icons";
+import Form from "./Form";
 
 const styles = {
   Paper: {
@@ -27,9 +28,18 @@ const styles = {
 export default ({
   courses,
   category,
+  categories, // from the store
+  editMode,
   onSelect,
-  course: { id, title = 'Welcome!', description= 'Please select a course from the list on the left.' },
-  onCourseDelete
+  course,
+  course: {
+    id,
+    title = "Welcome!",
+    description = "Please select a course from the list on the left."
+  },
+  onCourseDelete,
+  onCourseEdit,
+  onEdit
 }) => (
   <Grid container>
     <Grid item sm={3}>
@@ -42,16 +52,14 @@ export default ({
               </Typography>
               <List component="ul">
                 {courses.map(({ id, title }) => (
-                  <ListItem
-                    button
-                    key={id}
-                    onClick={() => onSelect(id)}>
-                    <ListItemText
-                      primary={title}
-                    />
+                  <ListItem button key={id} onClick={() => onSelect(id)}>
+                    <ListItemText primary={title} />
                     <ListItemSecondaryAction>
                       <IconButton>
-                        <Delete onClick={() => onCourseDelete(id)}/>
+                        <Edit onClick={() => onCourseEdit(id)} />
+                      </IconButton>
+                      <IconButton>
+                        <Delete onClick={() => onCourseDelete(id)} />
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
@@ -64,12 +72,22 @@ export default ({
     </Grid>
     <Grid item sm={9}>
       <Paper style={styles.Paper}>
-        <Typography variant="h5" style={{ marginBottom: 20 }}>
-          {title}
-        </Typography>
-        <Typography variant="subheading">
-          {description}
-        </Typography>
+        {editMode ? (
+          <DialogContent>
+            <Form
+            course={course}
+            categories={categories}
+            onSubmit={onEdit}
+            />
+          </DialogContent>
+        ) : (
+          <Fragment>
+            <Typography variant="h5" style={{ marginBottom: 20 }}>
+              {title}
+            </Typography>
+            <Typography variant="subheading">{description}</Typography>
+          </Fragment>
+        )}
       </Paper>
     </Grid>
   </Grid>

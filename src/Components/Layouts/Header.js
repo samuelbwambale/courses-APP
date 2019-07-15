@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
-import CreateDialog from '../Courses/Dialogs/Create'
+import CreateDialog from '../Courses/Dialog'
 
 // export default a function that is going to recieve props
 export default ({ categories, onCourseCreate }) => (
