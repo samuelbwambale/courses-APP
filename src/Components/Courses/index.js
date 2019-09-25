@@ -42,7 +42,7 @@ export default ({
   onEdit
 }) => (
   <Grid container>
-    <Grid item sm={3}>
+    <Grid item xs={12} sm={4}>
       <Paper style={styles.Paper}>
         {courses.map(([group, courses]) =>
           !category || category === group ? (
@@ -70,7 +70,7 @@ export default ({
         )}
       </Paper>
     </Grid>
-    <Grid item sm={9}>
+    <Grid item xs={12} sm={8}>
       <Paper style={styles.Paper}>
         {editMode ? (
           <DialogContent>
