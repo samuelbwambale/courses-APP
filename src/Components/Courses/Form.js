@@ -56,6 +56,12 @@ export default withStyles(styles)(
       });
       this.setState(this.getInitialCourseState());
     };
+
+    canBeSubmitted() {
+      const {title, description, categories} = this.state
+      return title.length > 0 && description.length && categories.length 
+    }
+
     render() {
       const { title, description, categories } = this.state,
         { course, classes, categories: categoriesInProps } = this.props;
@@ -111,6 +117,7 @@ export default withStyles(styles)(
                 color="secondary"
                 variant="raised"
                 onClick={this.handleSubmit}
+                disabled={!this.canBeSubmitted()}
               >
                 {course ? "Edit" : "Create"}
               </Button>

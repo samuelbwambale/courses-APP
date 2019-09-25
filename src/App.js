@@ -57,7 +57,7 @@ class App extends Component {
   handleSelectCourseEdit = id => {
     this.setState(({ courses }) => ({
       course: courses.find(ex => ex.id === id),
-      editMode: true
+      editMode: true,
     }));
   }
 
@@ -67,7 +67,8 @@ class App extends Component {
         ...courses.filter(crs => crs.id !== course.id),
         course
       ],
-      course
+      course,
+      editMode: true,
     }))
   }
 
