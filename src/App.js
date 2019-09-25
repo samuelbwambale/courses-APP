@@ -68,6 +68,7 @@ class App extends Component {
         course
       ],
       course,
+      editMode: true,
     }))
   }
 
