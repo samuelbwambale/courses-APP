@@ -74,7 +74,7 @@ export default withStyles(styles)(
               value={title}
               onChange={this.handleChange("title")}
               margin="normal"
-              className={classes.formControl}
+              // className={classes.formControl}
               variant="outlined"
               autoFocus
               fullWidth
@@ -88,19 +88,18 @@ export default withStyles(styles)(
               value={description}
               onChange={this.handleChange("description")}
               margin="normal"
-              className={classes.formControl}
+              // className={classes.formControl}
               variant="outlined"
               fullWidth
             />
             <br />
 
-            <FormControl margin="normal" className={classes.formControl} >
+            <FormControl margin="normal" fullWidth>
               <InputLabel htmlFor="categories">Categories</InputLabel>
               <Select
                 value={categories}
                 onChange={this.handleChange("categories")}
                 margin="normal"
-                fullWidth
               >
                 {categoriesInProps.map(category => (
                   <MenuItem key={category} value={category}>
@@ -111,7 +110,7 @@ export default withStyles(styles)(
             </FormControl>
             <br />
 
-            <DialogActions className={classes.formControl}>
+            <DialogActions>
               <Button
 
                 color="secondary"

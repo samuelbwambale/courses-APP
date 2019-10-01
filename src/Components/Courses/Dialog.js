@@ -46,6 +46,8 @@ export default class CreateDialog extends Component {
             open={open}
             aria-labelledby="form-dialog-title"
             onClose={this.handleToggle}
+            fullWidth
+            maxWidth="sm"
           >
             <DialogTitle id="form-dialog-title">
               Create a New Course
