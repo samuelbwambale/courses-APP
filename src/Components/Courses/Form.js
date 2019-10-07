@@ -64,7 +64,7 @@ export default withStyles(styles)(
 
     render() {
       const { title, description, categories } = this.state,
-        { course, classes, categories: categoriesInProps } = this.props;
+        { course, categories: categoriesInProps } = this.props;
 
       return (
         <form>
@@ -74,7 +74,6 @@ export default withStyles(styles)(
               value={title}
               onChange={this.handleChange("title")}
               margin="normal"
-              // className={classes.formControl}
               variant="outlined"
               autoFocus
               fullWidth
@@ -88,7 +87,6 @@ export default withStyles(styles)(
               value={description}
               onChange={this.handleChange("description")}
               margin="normal"
-              // className={classes.formControl}
               variant="outlined"
               fullWidth
             />
@@ -114,7 +112,7 @@ export default withStyles(styles)(
               <Button
 
                 color="secondary"
-                variant="raised"
+                variant="contained"
                 onClick={this.handleSubmit}
                 disabled={!this.canBeSubmitted()}
               >

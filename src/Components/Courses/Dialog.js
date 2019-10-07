@@ -35,7 +35,7 @@ export default class CreateDialog extends Component {
         <Fragment>
           <Button
             variant="fab"
-            color="primary"
+            color="secondary"
             mini
             onClick={this.handleToggle}
           >
