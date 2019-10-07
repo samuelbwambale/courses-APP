@@ -14,13 +14,17 @@ import { Delete, Edit } from "@material-ui/icons";
 import Form from "./Form";
 
 const styles = {
-  Paper: {
+  paper: {
     padding: 20,
     margin: 10,
     marginTop: 10,
     marginBottom: 10,
-    height: 500,
+    height: 600,
     overflowY: "auto"
+  },
+  container: {
+    // subtract
+    height: "calc(100% - 64px - 48px)"
   }
 };
 
@@ -43,25 +47,42 @@ export default ({
 }) => (
   <Grid container>
     <Grid item xs={12} sm={4}>
-      <Paper style={styles.Paper}>
+      <Paper style={styles.paper}>
         {courses.map(([group, courses]) =>
           !category || category === group ? (
             <Fragment key={group}>
-              <Typography variant="h6" style={{ textTransform: "capitalize" }}>
+              <Typography
+                color="secondary"
+                variant="h6"
+                style={{ textTransform: "capitalize" }}
+              >
                 {group}
               </Typography>
               <List component="ul">
                 {courses.map(({ id, title }) => (
                   <ListItem button key={id} onClick={() => onSelect(id)}>
-                    <ListItemText primary={title} />
-                    <ListItemSecondaryAction>
-                      <IconButton>
-                        <Edit onClick={() => onCourseEdit(id)} />
-                      </IconButton>
-                      <IconButton>
-                        <Delete onClick={() => onCourseDelete(id)} />
-                      </IconButton>
-                    </ListItemSecondaryAction>
+                    <Grid container spacing={1}>
+                      <Grid item xs={8}>
+                        <ListItemText primary={title} />
+                      </Grid>
+
+                      <Grid item xs={4}>
+                        <ListItemSecondaryAction>
+                          <IconButton>
+                            <Edit
+                              color="primary"
+                              onClick={() => onCourseEdit(id)}
+                            />
+                          </IconButton>
+                          <IconButton>
+                            <Delete
+                              color="primary"
+                              onClick={() => onCourseDelete(id)}
+                            />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </Grid>
+                    </Grid>
                   </ListItem>
                 ))}
               </List>
@@ -71,14 +92,10 @@ export default ({
       </Paper>
     </Grid>
     <Grid item xs={12} sm={8}>
-      <Paper style={styles.Paper}>
+      <Paper style={styles.paper}>
         {editMode ? (
           <DialogContent>
-            <Form
-            course={course}
-            categories={categories}
-            onSubmit={onEdit}
-            />
+            <Form course={course} categories={categories} onSubmit={onEdit} />
           </DialogContent>
         ) : (
           <Fragment>
