@@ -61,28 +61,21 @@ export default ({
               <List component="ul">
                 {courses.map(({ id, title }) => (
                   <ListItem button key={id} onClick={() => onSelect(id)}>
-                    <Grid container spacing={1}>
-                      <Grid item xs={8}>
-                        <ListItemText primary={title} />
-                      </Grid>
-
-                      <Grid item xs={4}>
-                        <ListItemSecondaryAction>
-                          <IconButton>
-                            <Edit
-                              color="primary"
-                              onClick={() => onCourseEdit(id)}
-                            />
-                          </IconButton>
-                          <IconButton>
-                            <Delete
-                              color="primary"
-                              onClick={() => onCourseDelete(id)}
-                            />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </Grid>
-                    </Grid>
+                    <ListItemText primary={title} />
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Edit
+                          color="primary"
+                          onClick={() => onCourseEdit(id)}
+                        />
+                      </IconButton>
+                      <IconButton>
+                        <Delete
+                          color="primary"
+                          onClick={() => onCourseDelete(id)}
+                        />
+                      </IconButton>
+                    </ListItemSecondaryAction>
                   </ListItem>
                 ))}
               </List>

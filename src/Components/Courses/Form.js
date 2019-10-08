@@ -111,7 +111,7 @@ export default withStyles(styles)(
             <DialogActions>
               <Button
 
-                color="secondary"
+                color="primary"
                 variant="contained"
                 onClick={this.handleSubmit}
                 disabled={!this.canBeSubmitted()}
