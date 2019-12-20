@@ -39,7 +39,7 @@ export default ({
   course: {
     id,
     title = "Welcome!",
-    description = "Please select a course from the list on the left."
+    description = "Please select a course from the list"
   },
   onCourseDelete,
   onCourseEdit,
